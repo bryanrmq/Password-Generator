@@ -26,10 +26,12 @@
 		/*
 			METHODS
 		*/
-		public function __construct($size = NULL, $difficulty = PW_LOWER) {
+		public function __construct($size = NULL, $difficulty = PW_LOWER, $additionnal = '') {
 			if($size != NULL)
 				$this->size = $size;
 			$this->setDifficulty($difficulty);
+			if(!empty($additionnal) && is_string($additionnal))
+				$this->chars .= $additionnal;
 			for($i = 0; $i < $this->size; $i++) {
 				$this->password .= $this->getChar();
 			}
@@ -113,8 +115,13 @@
 		$password = new Password(10);
 		$password = new Password(10, PW_LOWER);
 		$password = new Password(10, PW_LOWER | PW_NUMBER | PW_SPECIAL | PW_UPPER);
+		$password = new Password(10, PW_LOWER | PW_NUMBER | PW_SPECIAL | PW_UPPER, 'àç!è§(=+/ù$€*_-"');
 
-		echo $password->getPassword() . '<br />';
+		echo $password->getPassword();
 	*/
+
+
+		$password = new Password(32, PW_UPPER | PW_LOWER | PW_SPECIAL | PW_LOWER);
+		echo $password->getPassword();
 
 ?>
